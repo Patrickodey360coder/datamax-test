@@ -38,7 +38,14 @@ class BooksController extends Controller
     //read 
     public function read () {
         $books = Books::all();
-        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+
+        if ($books) {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+        }
+
+        else {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+        }
     }
 
     public function show ($id) {
