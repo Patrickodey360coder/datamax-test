@@ -10,9 +10,15 @@ class BooksController extends Controller
 {
     //Requirement 1
     public function fetchbooks() {
-        $response = Http::get('https://www.anapioficeandfire.com/api/books');
+        $response = Http::get('https://www.anapioficeandfire.com/api/book');
         $books = $response->json(); 
-        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+        if ($books) {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+        } 
+        
+        else {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+        }
     }
 
     //Requirement 2
@@ -35,6 +41,11 @@ class BooksController extends Controller
         return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
     }
 
+    public function show ($id) {
+        $books = Books::find($id);
+        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+    }
+
     //update
     public function update (Request $request, $id) {
         $books = Books::find($id);
@@ -48,5 +59,12 @@ class BooksController extends Controller
         $books->update(); 
         
         return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name .' was updated successfully']);
+    }
+
+    public function delete ($id) {
+        $books = Books::find($id);
+        $books->delete();
+
+        return response()->json(['message' => 'book was successfully deleted']);
     }
 }
