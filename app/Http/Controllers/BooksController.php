@@ -11,19 +11,8 @@ class BooksController extends Controller
     //Requirement 1
     public function fetchbooks() {
         $response = Http::get('https://www.anapioficeandfire.com/api/books');
-        $books = json_decode($response->body());
-        //     foreach ($books as $book){
-        //         $result = new Books;
-        //         $result->name = $book->name;
-        //         $result->isbn = $book->isbn;
-        //         $result->authors = $book->authors;
-        //         $result->country = $book->country;
-        //         $result->number_of_pages = $book->number_of_pages;
-        //         $result->publisher = $book->publisher;
-        //         $result->release_date = $book->release_date;
-        //         $result->save();  
-        //     };
-        return $books;
+        $books = $response->json(); 
+        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
     }
 
     //Requirement 2
@@ -33,16 +22,31 @@ class BooksController extends Controller
         $books->isbn = "123-3213243567";
         $books->authors = "John Doe";
         $books->country = "United States";
-        $books->number_of_pages = "350";
+        $books->number_of_pages = 350;
         $books->publisher = "Acme Books";
         $books->release_date = "2019-08-01";
         $books->save(); 
-        return response()->json(['status_code' => '201', 'status' => 'success', 'data' => $books]);
+        return response()->json(['status_code' => 201, 'status' => 'success', 'data' => $books]);
     }
 
-    //Requirement 3 
+    //read 
     public function read () {
-        $book = new Books;
+        $books = Books::all();
+        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+    }
+
+    //update
+    public function update (Request $request, $id) {
+        $books = Books::find($id);
+        $books->name = $request->name;
+        $books->isbn = $request->isbn;
+        $books->authors = $request->authors;
+        $books->country = $request->country;
+        $books->number_of_pages = $request->number_of_pages;
+        $books->publisher = $request->publisher;
+        $books->release_date = $request->release_date;
+        $books->update(); 
         
+        return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name .' was updated successfully']);
     }
 }

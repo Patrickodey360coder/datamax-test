@@ -25,9 +25,9 @@ Route::get('/external-books', [BooksController::class, 'fetchbooks']);
 Route::prefix('v1')->group(function () {
     //Requirement 2
     Route::post('/books', [BooksController::class, 'create']);
-
-    //Requirement 3
     Route::get('/books', [BooksController::class, 'read']);
+    Route::put('/books/{id}', [BooksController::class, 'update']);
+    Route::delete('/books/{id}', [BooksController::class, 'delete']);
 });
 
 
