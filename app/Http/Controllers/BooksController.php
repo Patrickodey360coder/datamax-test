@@ -13,11 +13,11 @@ class BooksController extends Controller
         $response = Http::get('https://www.anapioficeandfire.com/api/book');
         $books = $response->json(); 
         if ($books) {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books], 200);
         } 
         
         else {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []], 200);
         }
     }
 
@@ -32,7 +32,7 @@ class BooksController extends Controller
         $books->publisher = "Acme Books";
         $books->release_date = "2019-08-01";
         $books->save(); 
-        return response()->json(['status_code' => 201, 'status' => 'success', 'data' => $books]);
+        return response()->json(['status_code' => 201, 'status' => 'success', 'data' => $books], 201);
     }
 
     //read 
@@ -40,22 +40,22 @@ class BooksController extends Controller
         $books = Books::all();
 
         if ($books) {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books], 200);
         }
 
         else {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []], 200);
         }
     }
 
     public function show ($id) {
         $books = Books::find($id);
         if ($books) {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books], 200);
         }
 
         else {
-            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []], 200);
         }
     }
 
@@ -81,19 +81,18 @@ class BooksController extends Controller
         $books->release_date    = $request->release_date;
         $books->update(); 
         
-        return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name. ' updated successfully']);
+        return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name. ' updated successfully'], 200);
     }
 
     public function delete ($id) {
         $books = Books::find($id);
-        $books->delete();
-
         if ($books) {
-            return response()->json(['status_code' => 204, 'status' => 'success','message' => 'The book '. $books->name .' was deleted successfully']);
+            $books->delete();
+            return response()->json(['status_code' => 204, 'status' => 'success','message' => 'The book '. $books->name .' was deleted successfully'], 204);
         }
 
         else {
-            return response()->json(['message' => 'The book you are trying to delete does not exist']);
+            return response()->json(['message' => 'The book you are trying to delete does not exist'], 404);
         }
     }
 }
