@@ -50,28 +50,50 @@ class BooksController extends Controller
 
     public function show ($id) {
         $books = Books::find($id);
-        return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+        if ($books) {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => $books]);
+        }
+
+        else {
+            return response()->json(['status_code' => 200, 'status' => 'success', 'data' => []]);
+        }
     }
 
     //update
     public function update (Request $request, $id) {
+        $request->validate([
+            'name'            => 'required',
+            'isbn'            => 'required',
+            'authors'         => 'required',
+            'country'         => 'required',
+            'number_of_pages' => 'required',
+            'publisher'       => 'required',
+            'release_date'    => 'required'
+        ]);
+
         $books = Books::find($id);
-        $books->name = $request->name;
-        $books->isbn = $request->isbn;
-        $books->authors = $request->authors;
-        $books->country = $request->country;
+        $books->name            = $request->name;
+        $books->isbn            = $request->isbn;
+        $books->authors         = $request->authors;
+        $books->country         = $request->country;
         $books->number_of_pages = $request->number_of_pages;
-        $books->publisher = $request->publisher;
-        $books->release_date = $request->release_date;
+        $books->publisher       = $request->publisher;
+        $books->release_date    = $request->release_date;
         $books->update(); 
         
-        return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name .' was updated successfully']);
+        return response()->json(['status_code' => 200, 'status' => 'success', 'message' => 'The book '.$books->name. ' updated successfully']);
     }
 
     public function delete ($id) {
         $books = Books::find($id);
         $books->delete();
 
-        return response()->json(['message' => 'book was successfully deleted']);
+        if ($books) {
+            return response()->json(['status_code' => 204, 'status' => 'success','message' => 'The book '. $books->name .' was deleted successfully']);
+        }
+
+        else {
+            return response()->json(['message' => 'The book you are trying to delete does not exist']);
+        }
     }
 }
