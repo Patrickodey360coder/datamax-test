@@ -66749,18 +66749,10 @@ function Books() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       book = _useState2[0],
-      setBook = _useState2[1]; // useEffect(() => {
-  //     fetch('api/v1/books')
-  //         .then(response => response.json())
-  //         .then((data) => {
-  //             setBook(data.data)
-  //         },
-  //         (err => {
-  //             console.log("error occured:",err);
-  //         }))
-  // }, []);
+      setBook = _useState2[1];
 
-
+  var api1 = "https://www.anapioficeandfire.com/api/books";
+  var api2 = "api/v1/books";
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     getData();
 
@@ -66776,7 +66768,7 @@ function Books() {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return fetch('https://www.anapioficeandfire.com/api/books');
+                return fetch(api2);
 
               case 2:
                 response = _context.sent;
@@ -66785,7 +66777,7 @@ function Books() {
 
               case 5:
                 data = _context.sent;
-                setBook(data);
+                setBook(data.data);
 
               case 7:
               case "end":
@@ -66797,6 +66789,20 @@ function Books() {
       return _getData.apply(this, arguments);
     }
   }, []);
+
+  var deleted = function deleted(item) {
+    var tool = book.filter(function (i) {
+      return i.id !== item.id;
+    });
+    confirm('Are you sure you want to delete this book?') ? (setBook(tool), alert("Book was deleted succesfully")) : console.log('not deleted'); // setBook(tool)    
+
+    console.log(book);
+  };
+
+  var update = function update() {
+    console.log("updated");
+  };
+
   console.log(_typeof(book), book);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "container"
@@ -66817,8 +66823,14 @@ function Books() {
     }, "Title: ", item.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "isbn:"), " ", item.isbn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "authors:"), " ", item.authors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Pages:"), " ", item.numberOfPages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Publishers:"), " ", item.publisher), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Country:"), " ", item.country), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Release Date:"), " ", item.release_date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "col text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        return update();
+      },
       className: "btn btn-success mx-2"
     }, "Update"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        return deleted(item);
+      },
       className: "btn btn-danger mx-2"
     }, "Delete")));
   })))));
