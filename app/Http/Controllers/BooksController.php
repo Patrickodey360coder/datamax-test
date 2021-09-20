@@ -23,14 +23,34 @@ class BooksController extends Controller
 
     //Requirement 2
     public function create (Request $request) {
+        // $books = new Books;
+        // $books->name = "My First Book";
+        // $books->isbn = "123-3213243567";
+        // $books->authors = "John Doe";
+        // $books->country = "United States";
+        // $books->number_of_pages = 350;
+        // $books->publisher = "Acme Books";
+        // $books->release_date = "2019-08-01";
+        // $books->save(); 
+
+        $request->validate([
+            'name'            => 'required',
+            'isbn'            => 'required',
+            'authors'         => 'required',
+            'country'         => 'required',
+            'number_of_pages' => 'required',
+            'publisher'       => 'required',
+            'release_date'    => 'required'
+        ]);
+
         $books = new Books;
-        $books->name = "My First Book";
-        $books->isbn = "123-3213243567";
-        $books->authors = "John Doe";
-        $books->country = "United States";
-        $books->number_of_pages = 350;
-        $books->publisher = "Acme Books";
-        $books->release_date = "2019-08-01";
+        $books->name            = $request->name;
+        $books->isbn            = $request->isbn;
+        $books->authors         = $request->authors;
+        $books->country         = $request->country;
+        $books->number_of_pages = $request->number_of_pages;
+        $books->publisher       = $request->publisher;
+        $books->release_date    = $request->release_date;
         $books->save(); 
         return response()->json(['status_code' => 201, 'status' => 'success', 'data' => $books], 201);
     }
@@ -48,6 +68,7 @@ class BooksController extends Controller
         }
     }
 
+    //show
     public function show ($id) {
         $books = Books::find($id);
         if ($books) {
