@@ -17,10 +17,9 @@ function Books() {
 
     const deleted = (item) => {
 
-    const tool = book.filter(i => i.id !== item.id)
-        confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`Book was deleted succesfully`)) : console.log('not deleted');   
+    const tool = book.filter(i => i.isbn !== item.isbn)
+        confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`${item.name} was deleted succesfully`)) : console.log('not deleted');   
         console.log(book);
-
     }
 
     const update = () => {
@@ -45,13 +44,13 @@ console.log(typeof(book), book)
                                     <p><b>Pages:</b> {item.numberOfPages}</p>
                                     <p><b>Publishers:</b> {item.publisher}</p>
                                     <p><b>Country:</b> {item.country}</p>
-                                    <p><b>Release Date:</b> {item.release_date}</p>
+                                    <p><b>Release Date:</b> {item.released}</p>
                                     <div className="col text-center">
                                     <button onClick={()=> deleted(item)} className="btn btn-danger mx-2">Delete</button>
                                     <button className="btn btn-success mx-2">Update</button>
                                     </div>
                                 </div>
-                            ) )
+                            ) ) 
                         }
                     </div>
                 </div>
