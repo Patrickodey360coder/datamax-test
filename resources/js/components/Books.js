@@ -33,8 +33,8 @@ console.log(typeof(book), book)
     
     return (
         <div className="container">
-        <Form/>
             <div className="row justify-content-center">
+                <h1 className="text-center mt-3">Ice & Fire Library</h1>
                 <div className="col-md-10">
                     <div className="">
                         {
@@ -48,8 +48,9 @@ console.log(typeof(book), book)
                                     <p><b>Country:</b> {item.country}</p>
                                     <p><b>Release Date:</b> {item.release_date}</p>
                                     <div className="col text-center">
+                                    <button onClick={()=> deleted(item)} className="btn btn-danger mx-2">Delete</button>
                                     <button className="btn btn-success mx-2">Update</button>
-                                    <button onClick={()=> deleted(item)} className="btn btn-danger mx-2">Delete</button></div>
+                                    </div>
                                 </div>
                             ) )
                         }
