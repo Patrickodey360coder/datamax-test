@@ -1,4 +1,6 @@
-## How to use
+## DATAMAX CRUD TEST USING LARAVEL AND REACT 
+
+# How to use
 - Clone project
 - Open terminal
 - install node modules

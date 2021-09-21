@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
+import Form from './Form'
 function Books() {
     const [book, setBook] = useState([]);
 
@@ -33,6 +33,7 @@ console.log(typeof(book), book)
     
     return (
         <div className="container">
+        <Form/>
             <div className="row justify-content-center">
                 <div className="col-md-10">
                     <div className="">
