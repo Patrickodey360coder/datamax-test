@@ -39,8 +39,8 @@ console.log(typeof(book), book)
                     <div className="">
                         {
                             book.map( (item, index)=> (
-                                <div className="my-5 card" key={index}>
-                                    <a href=""><h3 className="text-center">Title: {item.name}</h3></a>
+                                <div className="my-5 card p-3" key={index}>
+                                    <h4 className="text-center text-primary">Title: {item.name}</h4>
                                     <p><b>isbn:</b> {item.isbn}</p>
                                     <p><b>authors:</b> {item.authors}</p>
                                     <p><b>Pages:</b> {item.numberOfPages}</p>
