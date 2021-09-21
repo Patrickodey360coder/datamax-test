@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
+
 
 function Books() {
     const [book, setBook] = useState([]);
@@ -47,14 +50,14 @@ console.log(typeof(book), book)
                                     <p><b>Country:</b> {item.country}</p>
                                     <p><b>Release Date:</b> {item.release_date}</p>
                                     <div className="col text-center">
-                                    <button onClick={()=> update()} className="btn btn-success mx-2">Update</button>
+                                    <button className="btn btn-success mx-2">Update</button>
                                     <button onClick={()=> deleted(item)} className="btn btn-danger mx-2">Delete</button></div>
                                 </div>
                             ) )
                         }
                     </div>
                 </div>
-            </div>
+            </div>       
         </div>
     );
 }
