@@ -27,7 +27,7 @@ function Books() {
     }
 
 
-console.log(typeof(book), book)
+    console.log(typeof(book), book)
     
     return (
         <div className="container">
