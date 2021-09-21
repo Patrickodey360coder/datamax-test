@@ -86324,7 +86324,7 @@ function Books() {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return fetch(api2);
+                return fetch(api1);
 
               case 2:
                 response = _context.sent;
@@ -86333,7 +86333,7 @@ function Books() {
 
               case 5:
                 data = _context.sent;
-                setBook(data.data);
+                setBook(data);
 
               case 7:
               case "end":
@@ -86350,8 +86350,7 @@ function Books() {
     var tool = book.filter(function (i) {
       return i.id !== item.id;
     });
-    confirm('Are you sure you want to delete this book?') ? (setBook(tool), alert("Book was deleted succesfully")) : console.log('not deleted'); // setBook(tool)    
-
+    confirm('Are you sure you want to delete this book?') ? (setBook(tool), alert("Book was deleted succesfully")) : console.log('not deleted');
     console.log(book);
   };
 

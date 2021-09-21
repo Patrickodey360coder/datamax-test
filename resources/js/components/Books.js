@@ -8,18 +8,17 @@ function Books() {
     useEffect(()=> {
         getData();
         async function getData() {
-        const response = await fetch(api2)
+        const response = await fetch(api1)
         const data = await response.json()
 
-        setBook(data.data)
+        setBook(data)
         }
     }, []);
 
     const deleted = (item) => {
 
     const tool = book.filter(i => i.id !== item.id)
-        confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`Book was deleted succesfully`)) : console.log('not deleted');
-        // setBook(tool)    
+        confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`Book was deleted succesfully`)) : console.log('not deleted');   
         console.log(book);
 
     }

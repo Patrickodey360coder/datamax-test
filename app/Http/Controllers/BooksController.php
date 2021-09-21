@@ -109,7 +109,7 @@ class BooksController extends Controller
         $books = Books::find($id);
         if ($books) {
             $books->delete();
-            return response()->json(['status_code' => 204, 'status' => 'success','message' => 'The book '. $books->name .' was deleted successfully'], 204);
+            return response()->json(['status_code' => 204, 'status' => 'success','message' => 'The book '. $books->name .' was deleted successfully']);
         }
 
         else {
