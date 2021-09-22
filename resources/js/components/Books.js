@@ -16,10 +16,9 @@ function Books() {
     }, []);
 
     const deleted = (item) => {
-
-    const tool = book.filter(i => i.isbn !== item.isbn)
-        confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`${item.name} was deleted succesfully`)) : console.log('not deleted');   
-        console.log(book);
+        const tool = book.filter(i => i.isbn !== item.isbn)
+            confirm('Are you sure you want to delete this book?')? (setBook(tool), alert(`${item.name} was deleted succesfully`)) : console.log('not deleted');   
+            console.log(book);
     }
 
     const update = () => {
